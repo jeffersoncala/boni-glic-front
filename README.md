@@ -1,4 +1,4 @@
-# central-de-atendimento
+# boni-glic-front
 
 ## Project setup
 ```
