@@ -1,4 +1,4 @@
-# boni-glic-front
+# Controle de Glicose da Boni
 
 ## Project setup
 ```
