@@ -1,4 +1,4 @@
-# Controle de Glicose da Boni
+# Controle de Glicose da Boni (Front)
 
 ## Project setup
 ```
