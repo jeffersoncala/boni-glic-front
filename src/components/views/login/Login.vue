@@ -4,11 +4,11 @@
     <h1>Controle de Glicose Boni</h1>
     <p>Sistema para armazenamento de informações de glicemia para cães com diabetes.</p>
     <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" v-model="user">
         <label for="inputEmail">Usuário</label>
     </div>
     <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" v-model="password">
         <label for="inputPassword">Senha</label>
     </div>
     <div class="checkbox mb-3">
@@ -16,14 +16,42 @@
             <input type="checkbox" value="remember-me"> Lembrar senha
         </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Confirmar</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="this.login">Confirmar</button>
     <p class="mt-5 mb-3 text-muted text-center">© 2022</p>
   </form>
 </template>
 
 <script>
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(process.env.VUE_APP_SUPABASE_URL, process.env.VUE_APP_SUPABASE_KEY)
+
 export default {
   name: 'LoginPage',
+  data: function () {
+    return {
+        user: '',
+        password: ''
+    }
+  },
+  methods:{
+    async login(){
+        let { data: reponseLogin } = await supabase
+        .from('boni-glic')
+        .select("*")
+        .eq('user', `${this.user}`)
+        .eq('password', `${this.password}`)
+
+        console.info(reponseLogin)
+
+        if(reponseLogin.length > 0){
+            alert('Deu bom')
+
+        } else {
+            alert('Deu ruim')
+        }
+    }
+  }
 }
 </script>
 
