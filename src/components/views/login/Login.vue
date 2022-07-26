@@ -22,9 +22,7 @@
 </template>
 
 <script>
-import { createClient } from '@supabase/supabase-js'
-
-const supabase = createClient(process.env.VUE_APP_SUPABASE_URL, process.env.VUE_APP_SUPABASE_KEY)
+import { item } from '@/services/items'
 
 export default {
   name: 'LoginPage',
@@ -36,21 +34,24 @@ export default {
   },
   methods:{
     async login(){
-        let { data: reponseLogin } = await supabase
-        .from('boni-glic')
-        .select("*")
-        .eq('user', `${this.user}`)
-        .eq('password', `${this.password}`)
+        const it = await item.find();
+        // console.info(it)
+        // let { data: reponseLogin } = await supabase
+        // .from('boni-glic')
+        // .select("*")
+        // .eq('user', `${this.user}`)
+        // .eq('password', `${this.password}`)
 
-        console.info(reponseLogin)
+        // console.info(reponseLogin)
 
-        if(reponseLogin.length > 0){
-            alert('Deu bom')
+        // if(reponseLogin.length > 0){
+        //     alert('Deu bom')
 
-        } else {
-            alert('Deu ruim')
-        }
-    }
+        // } else {
+        //     alert('Deu ruim')
+        // }
+        return it;
+    } 
   }
 }
 </script>

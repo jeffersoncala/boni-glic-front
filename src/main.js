@@ -33,11 +33,9 @@ Vue.router = router
 Vue.use(Auth, {
 	auth: {
 		request: function (req, token) {
-      console.info('request')
 			this.options.http._setHeaders.call(this, req, { 'boni-glic-token': token })
 		},
 		response: function (res) {
-      console.info('response')
 			const headers = res.data
 			return headers.token
 		}
@@ -54,6 +52,9 @@ Vue.use(Auth, {
 	},
 	refreshData: {
 		enabled: false
+	},
+	tokenExpired: function () {
+		return false
 	}
 })
 

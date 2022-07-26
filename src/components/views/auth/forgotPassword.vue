@@ -1,15 +1,25 @@
 <template>
-  <form id="login" class="form-signin">
-    <img class="img_login mb-4" src="./../../../assets/img/logo-login.png" />
-    <h1>Controle de Glicose Boni</h1>
-    <p>Sistema para armazenamento de informações de glicemia para cães com diabetes.</p>
-    <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" v-model="user">
-        <label for="inputEmail">Usuário</label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" @click="this.login">Confirmar</button>
-    <p class="mt-5 mb-3 text-muted text-center">© 2022</p>
-  </form>
+  <section id="forgot-password">
+    <form @submit.prevent="recoverPassword" v-if="!sendMessage">
+			<div class="field">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" v-model.lazy="form.email"  />
+			</div>
+
+			<div class="controls">
+				<button type="submit">ENVIAR</button>
+				<router-link :to="{ name: 'login' }">Voltar para a tela de login</router-link>
+			</div>
+		</form>
+
+		<message v-else>
+			{{ message }}
+
+			<template v-slot:footer v-if="error">
+				<button type="button" @click="sendMessage = !sendMessage">voltar para recuperar senha</button>
+			</template>
+		</message>
+  </section>
 </template>
 
 <script>
