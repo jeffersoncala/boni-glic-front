@@ -24,6 +24,7 @@ const childRoutes = [
 	{
 		path: '/',
 		name: 'home',
+		meta: {auth: [3], redirect: {name: 'login'}},
 		component: HomePage,
 		// children: [
 		// 	{

@@ -6,11 +6,15 @@ import Auth from '@websanova/vue-auth'
 import VueAuthHttp from '@websanova/vue-auth/drivers/http/axios.1.x'
 import VueAuthRouter from '@websanova/vue-auth/drivers/router/vue-router.2.x'
 
+import {applyPolyfills,	defineCustomElements} from "../../boni-glic-webcomponents/loader";
+
 import router from '@/router'
 
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
+
+applyPolyfills().then(() => defineCustomElements());
 
 Vue.axios.defaults.baseURL = process.env.VUE_APP_ROOT_API
 Vue.axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -40,7 +44,7 @@ Vue.use(Auth, {
 			return headers.token
 		}
 	},
-	fetchData: { url: '/usuarios/minha_conta', method: 'GET' },
+	fetchData: { url: 'api/usuarios/minha_conta', method: 'GET' },
 	http: VueAuthHttp,
 	router: VueAuthRouter,
 	tokenDefaultKey: 'boni-glic-token',
